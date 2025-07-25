@@ -225,6 +225,21 @@ _C.TEST.FINAL_MODEL = "last_step"
 _C.TRAINER = CN()
 _C.TRAINER.NAME = ""
 
+# JAYA-specific configuration
+_C.TRAINER.JAYA = CN()
+_C.TRAINER.JAYA.PRECISION = "fp32"  # Precision type: fp16, fp32, etc.
+_C.TRAINER.JAYA.CONVERGENCE_CRITERIA = "patience"  # Criteria for stopping
+_C.TRAINER.JAYA.MAX_POPULATION_SIZE = 50  # Maximum size of the population
+
+_C.TRAINER.BWR = CN()
+_C.TRAINER.BWR.PRECISION = "fp32"  # Precision type: fp16, fp32, etc.
+_C.TRAINER.BWR.CONVERGENCE_CRITERIA = "patience"  # Criteria for stopping
+_C.TRAINER.BWR.MAX_POPULATION_SIZE = 50 
+
+_C.TRAINER.BMR = CN()
+_C.TRAINER.BMR.PRECISION = "fp32"  # Precision type: fp16, fp32, etc.
+_C.TRAINER.BMR.CONVERGENCE_CRITERIA = "patience"  # Criteria for stopping
+_C.TRAINER.BMR.MAX_POPULATION_SIZE = 50 
 ######
 # DA
 ######
@@ -308,3 +323,8 @@ _C.TRAINER.FIXMATCH = CN()
 _C.TRAINER.FIXMATCH.WEIGHT_U = 1.0  # weight on the unlabeled loss
 _C.TRAINER.FIXMATCH.CONF_THRE = 0.95  # confidence threshold
 _C.TRAINER.FIXMATCH.STRONG_TRANSFORMS = ()
+
+# Placeholder for Model API Key
+MODEL_API = {
+    "API_KEY": "moonshotai/kimi-k2:free"
+}

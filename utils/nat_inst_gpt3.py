@@ -33,8 +33,8 @@ BARD_TOKEN_LIST = [
     ]
 
 API_KEY_LIST = [
-            'openai-api-key-1',
-            'openai-api-key-2',
+            # '',
+            # 'openai-api-key-2',
     ]
 NUM_API_KEYS = len(API_KEY_LIST)
 
@@ -424,3 +424,33 @@ if __name__ == "__main__":
         task_labels = [l.strip(" ") for l in task_labels]
         for preds in [all_regular_preds, all_calibrated_preds, answer_list]:
             preds = [task_labels.index(l) for l in preds]
+
+import requests
+from Plum.config.defaults import OPENROUTER_API_KEY
+
+def query_mistral_model(prompt, max_tokens=100):
+    """
+    Queries the Mistral model via OpenRouter API.
+
+    Args:
+        prompt (str): The input prompt for the model.
+        max_tokens (int): The maximum number of tokens to generate.
+
+    Returns:
+        dict: The API response.
+    """
+    endpoint = "https://api.openrouter.ai/v1/completions"
+    headers = {
+        "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+        "Content-Type": "application/json"
+    }
+    payload = {
+        "model": "mistralai/mistral-small-3.2-24b-instruct:free",
+        "prompt": prompt,
+        "max_tokens": max_tokens
+    }
+    response = requests.post(endpoint, json=payload, headers=headers)
+    if response.status_code == 200:
+        return response.json()
+    else:
+        raise Exception(f"OpenRouter API request failed: {response.status_code} {response.text}")

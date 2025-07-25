@@ -5,7 +5,7 @@ import argparse
 import json
 import wandb
 from config import get_cfg_default
-from trainers import GA_trainer, HC_trainer, HS_trainer, TB_trainer
+from trainers import GA_trainer, HC_trainer, HS_trainer, TB_trainer, JAYA_trainer, BMR_trainer, BWR_trainer
 
 def print_args(args, cfg):
     print("***************")
@@ -145,6 +145,12 @@ def main(args):
         trainer = HC_trainer.HC_trainer(num_steps, patience, train_seed, data_seed, num_compose, num_candidates, backbone)
     elif args.algorithm == "hs":
         trainer = HS_trainer.HS_trainer(num_steps, patience, train_seed, data_seed, num_compose, num_candidates, backbone)
+    elif args.algorithm == "jaya":
+        trainer = JAYA_trainer.JAYATrainer(num_steps, patience, train_seed, data_seed, num_compose, num_candidates)
+    elif args.algorithm == "bmr":
+        trainer = JAYA_trainer.JAYATrainer(num_steps, patience, train_seed, data_seed, num_compose, num_candidates)
+    elif args.algorithm == "bwr":
+        trainer = JAYA_trainer.JAYATrainer(num_steps, patience, train_seed, data_seed, num_compose, num_candidates)
     elif args.algorithm == "tabu":
         trainer = TB_trainer.TB_trainer(num_steps, patience, train_seed, data_seed, num_compose, num_candidates, backbone)
     else:
